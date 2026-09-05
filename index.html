@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Broadcast Journalism | Day 4: Regulations, Rights, and Ethical Dilemmas</title>
+  <title>Basic Broadcast Technology | Day 4: Regulations, Rights, and Ethical Dilemmas</title>
   <style>
 :root {
   --primary: #15803d;
@@ -222,7 +222,7 @@ input, textarea, select {
           <img src="chisholm_logo.png" alt="Chisholm Logo" />
         </div>
         <div>
-          <h2>Broadcast Journalism</h2>
+          <h2>Basic Broadcast Technology</h2>
           <p class="subtitle">Unit 1: Foundations of Media Law, Ethics & Studio Operations — Day 4: Regulations, Rights, and Ethical Dilemmas</p>
         </div>
       </div>
@@ -354,8 +354,7 @@ function initLesson(data) {
   document.getElementById('slide-tracker').innerText = `Slide 1 of ${totalSlides}`;
 
   renderSlides(data.slides || []);
-  renderResources(data.resources || []);
-  renderForm(data.form || []);
+// renderResources(data.resources || []); // Disabled JSON resource injection  renderForm(data.form || []);
 
   randomizeBellringer();
 }
