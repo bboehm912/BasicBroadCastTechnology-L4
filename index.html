@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Broadcast Technology | Day 4: Regulations, Rights, and Ethical Dilemmas</title>
+  <style>
+:root {
+  --primary: #15803d;
+  --primary-dark: #166534;
+  --primary-light: #f0fdf4;
+  --bg-main: #f8fafc;
+  --card-bg: #ffffff;
+  --text-dark: #0f172a;
+  --text-muted: #475569;
+  --border: #cbd5e1;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-main);
+  margin: 0;
+  padding: 20px;
+  color: var(--text-dark);
+}
+
+.container { max-width: 980px; margin: 0 auto; }
+
+.header-card {
+  background: var(--card-bg);
+  padding: 20px 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+  border-top: 5px solid var(--primary);
+}
+
+.header-flex { display: flex; justify-content: space-between; align-items: center; }
+.header-left { display: flex; align-items: center; gap: 18px; }
+.logo-box { width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; }
+.logo-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+.stamp-container { width: 110px; height: 110px; position: relative; }
+.stamp-photo {
+  position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 60px; height: 60px;
+  border-radius: 50%; object-fit: cover;
+  z-index: 1;
+}
+.stamp-svg {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.nav-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+.tab-btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  font-weight: bold;
+  font-size: 0.95em;
+  cursor: pointer;
+  color: #334155;
+}
+.tab-btn.active { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+
+.card {
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+}
+
+.bellringer-box {
+  background: var(--primary-light);
+  border-left: 4px solid var(--primary);
+  padding: 14px 18px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deck-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.std-badge {
+  background: #dcfce7;
+  color: var(--primary-dark);
+  font-size: 0.78em;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #bbf7d0;
+}
+
+.slide-stage {
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  min-height: 440px;
+}
+
+.slide { display: none; }
+.slide.active { display: block; }
+
+.slide-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.slide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+}
+
+.slide-visual-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.callout-box {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: #f0fdf4;
+  border-left: 4px solid var(--primary);
+}
+
+.deck-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.ctrl-btn {
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  padding: 10px 22px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.ctrl-btn:disabled { background: #94a3b8; }
+
+.resource-card {
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-group {
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #e2e8f0;
+}
+label { font-weight: bold; margin-bottom: 6px; display: block; }
+input, textarea, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.submit-btn {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  padding: 14px;
+  font-size: 1.05em;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.muted { color: var(--text-muted); }
+.italic { font-style: italic; }
+.subtitle { color: var(--text-muted); }
+
+/* Print styles to ensure direct print works cleanly */
+@media print {
+  body * { visibility: hidden; }
+  #form-tab, #form-tab * { visibility: visible; }
+  #form-tab { position: absolute; left: 0; top: 0; width: 100%; }
+  .submit-btn { display: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header-card">
+    <div class="header-flex">
+      <div class="header-left">
+        <div class="logo-box">
+          <img src="chisholm_logo.png" alt="Chisholm Logo" />
+        </div>
+        <div>
+          <h2>Basic Broadcast Technology</h2>
+          <p class="subtitle">Unit 1: Foundations of Media Law, Ethics & Studio Operations — Day 4: Regulations, Rights, and Ethical Dilemmas</p>
+        </div>
+      </div>
+
+      <div class="stamp-container">
+        <img class="stamp-photo" src="boehm_photo.jpg" alt="Instructor Photo" />
+        <img class="stamp-svg" src="boehm-stamp.svg" alt="Classroom Stamp" />
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('deck')">Deck</button>
+    <button class="tab-btn" onclick="switchTab('res')">Resource Hub</button>
+    <button class="tab-btn" onclick="switchTab('form')">Student Work Checkpoint</button>
+  </div>
+
+  <!-- TAB: DECK -->
+  <div id="deck-tab" class="card tab-content active">
+    <div class="bellringer-box">
+      <div>
+        <strong>Daily Bellringer Writing Prompt</strong>
+        <p id="bellringer-display" class="italic">Loading prompt...</p>
+      </div>
+      <button class="ctrl-btn" onclick="randomizeBellringer()">Shuffle</button>
+    </div>
+
+    <div class="deck-header">
+      <h3>Unit 1: Foundations of Media Law, Ethics & Studio Operations</h3>
+      <span id="slide-tracker" class="std-badge">Slide 1 of {{total_slides}}</span>
+    </div>
+
+    <div id="slide-stage" class="slide-stage">
+      <!-- Slides injected by JavaScript -->
+    </div>
+
+    <div class="deck-controls">
+      <button class="ctrl-btn" id="prev-btn" onclick="moveSlide(-1)" disabled>Previous</button>
+      <button class="ctrl-btn" id="next-btn" onclick="moveSlide(1)">Next</button>
+    </div>
+  </div>
+
+  <!-- TAB: RESOURCE HUB -->
+  <div id="res-tab" class="card tab-content">
+    <h3>Lesson Resource & Reference Hub</h3>
+    <p class="muted">Access official course references below.</p>
+    <div id="resource-list">
+      <!-- Resources injected by JavaScript -->
+    </div>
+  </div>
+
+  <!-- TAB: STUDENT WORK CHECKPOINT -->
+  <div id="form-tab" class="card tab-content">
+    <h3>Student Work Checkpoint & Reflection</h3>
+    <form id="checkpoint-form" onsubmit="safePrint(event)">
+      <!-- Dynamic form fields injected by JavaScript -->
+      <button type="submit" class="submit-btn">Print this page and turn into the Red Basket!</button>
+    </form>
+  </div>
+
+</div> <!-- Closed container -->
+
+<script>
+let currentSlide = 1;
+let totalSlides = 1;
+let bellringers = [];
+
+function safePrint(e) {
+  if (e) e.preventDefault();
+  
+  const formElement = document.getElementById('checkpoint-form').cloneNode(true);
+  
+  // Copy current user inputs into clone
+  const originalInputs = document.querySelectorAll('#checkpoint-form input, #checkpoint-form textarea, #checkpoint-form select');
+  const clonedInputs = formElement.querySelectorAll('input, textarea, select');
+  originalInputs.forEach((input, index) => {
+    if (input.type === 'checkbox' || input.type === 'radio') {
+      clonedInputs[index].checked = input.checked;
+    } else {
+      clonedInputs[index].value = input.value;
+    }
+  });
+
+  const printHTML = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>${document.title}</title>
+      <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 30px; color: #0f172a; }
+        .form-group { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #cbd5e1; }
+        label { font-weight: bold; margin-bottom: 6px; display: block; }
+        input, textarea, select { width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; box-sizing: border-box; }
+        .submit-btn { display: none !important; }
+      </style>
+    </head>
+    <body>
+      <h2>Basic Broadcast Technology — Student Work Checkpoint</h2>
+      ${formElement.outerHTML}
+      <script>
+        window.onload = function() {
+          window.focus();
+          window.print();
+        };
+      <\/script>
+    </body>
+    </html>
+  `;
+
+  try {
+    const blob = new Blob([printHTML], { type: 'text/html' });
+    const blobUrl = URL.createObjectURL(blob);
+    const printWindow = window.open(blobUrl, '_blank');
+    if (!printWindow) {
+      window.print();
+    }
+  } catch (err) {
+    window.print();
+  }
+}
+
+const stockImagePool = [
+  'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=300&q=80',
+  'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=300&q=80',
+  'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=300&q=80',
+  'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=300&q=80',
+  'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=300&q=80',
+  'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=300&q=80'
+];
+
+const iconPool = ['🐢', '🌊', '🌱', '🗣️', '☯️', '📝'];
+
+function renderSlides(slides) {
+  const stage = document.getElementById('slide-stage');
+  stage.innerHTML = '';
+
+  slides.forEach((slide, index) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'slide' + (index === 0 ? ' active' : '');
+    wrapper.id = `slide-${index + 1}`;
+
+    const imageUrl = slide.image || stockImagePool[index % stockImagePool.length];
+    const fallbackEmoji = slide.icon || iconPool[index % iconPool.length];
+
+    const visualMediaHTML = `
+      <img src="${imageUrl}" 
+           alt="${slide.title}" 
+           style="width:110px;height:110px;object-fit:cover;border-radius:50%;border:3px solid var(--primary);" 
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+      <span style="font-size: 2.8em; display: none; margin-bottom: 8px;">${fallbackEmoji}</span>
+    `;
+
+    wrapper.innerHTML = `
+      <div class="slide-header">
+        <h3 class="slide-title">${slide.title}</h3>
+        <span class="std-badge">${slide.standard || ''}</span>
+      </div>
+      <div class="slide-grid">
+        <div class="slide-body">
+          <ul>
+            ${(slide.bullets || []).map(b => `<li>${b}</li>`).join('')}
+          </ul>
+          ${slide.callout ? `<div class="callout-box"><strong style="color: var(--primary-dark);">Key Takeaway:</strong> ${slide.callout}</div>` : ''}
+        </div>
+        <div class="slide-visual-card">
+          ${visualMediaHTML}
+          ${slide.visual_caption ? `<small style="color: var(--text-muted); display: block; font-size: 0.82em; margin-top: 6px;">${slide.visual_caption}</small>` : ''}
+        </div>
+      </div>
+    `;
+    stage.appendChild(wrapper);
+  });
+}
+
+function initLesson(data) {
+  bellringers = data.bellringers || [];
+  totalSlides = (data.slides || []).length || 1;
+
+  document.getElementById('slide-tracker').innerText = `Slide 1 of ${totalSlides}`;
+
+  renderSlides(data.slides || []);
+  renderResources(data.resources || []);
+  renderForm(data.form || []);
+
+  randomizeBellringer();
+}
+
+function randomizeBellringer() {
+  if (!bellringers.length) return;
+  const idx = Math.floor(Math.random() * bellringers.length);
+  document.getElementById('bellringer-display').innerText = bellringers[idx];
+}
+
+function moveSlide(dir) {
+  const newSlide = currentSlide + dir;
+  if (newSlide < 1 || newSlide > totalSlides) return;
+
+  document.getElementById(`slide-${currentSlide}`).classList.remove('active');
+  currentSlide = newSlide;
+  document.getElementById(`slide-${currentSlide}`).classList.add('active');
+
+  document.getElementById('slide-tracker').innerText = `Slide ${currentSlide} of ${totalSlides}`;
+  document.getElementById('prev-btn').disabled = currentSlide === 1;
+  document.getElementById('next-btn').disabled = currentSlide === totalSlides;
+}
+
+function renderResources(resources) {
+  const container = document.getElementById('resource-list');
+  if (!container) return;
+  container.innerHTML = '';
+
+  resources.forEach(res => {
+    const card = document.createElement('div');
+    card.className = 'resource-card';
+    card.innerHTML = `
+      <div>
+        <strong>${res.title}</strong><br/>
+        <small>${res.description || ''}</small>
+      </div>
+      <a href="${res.file}" class="ctrl-btn" target="_blank">Open Resource</a>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function renderForm(fields) {
+  const form = document.getElementById('checkpoint-form');
+  if (!form) return;
+  const submitBtn = form.querySelector('.submit-btn');
+  form.innerHTML = '';
+
+  fields.forEach(field => {
+    const group = document.createElement('div');
+    group.className = 'form-group';
+    const id = `field_${field.label.replace(/\s+/g, '_').toLowerCase()}`;
+
+    let inputHTML = '';
+    if (field.type === 'short_text') {
+      inputHTML = `<input type="text" id="${id}" ${field.required ? 'required' : ''} />`;
+    } else if (field.type === 'date') {
+      inputHTML = `<input type="date" id="${id}" ${field.required ? 'required' : ''} />`;
+    } else if (field.type === 'rating_scale') {
+      inputHTML = `<select id="${id}">${(field.options || []).map(o => `<option>${o}</option>`).join('')}</select>`;
+    } else if (field.type === 'quote_citation') {
+      inputHTML = `<textarea id="${id}" rows="3" ${field.required ? 'required' : ''}></textarea>`;
+    } else if (field.type === 'select_rubric') {
+      inputHTML = `<select id="${id}"><option>-- Select Rubric Benchmark Level --</option>${(field.options || []).map(o => `<option>${o}</option>`).join('')}</select>`;
+    } else if (field.type === 'checkbox_group' || field.type === 'multi_select') {
+      inputHTML = (field.options || []).map(o => `<label><input type="checkbox" name="${id}" value="${o}" /> ${o}</label>`).join('<br/>');
+    }
+
+    group.innerHTML = `<label for="${id}">${field.label}</label>${inputHTML}`;
+    form.appendChild(group);
+  });
+
+  if (submitBtn) form.appendChild(submitBtn);
+}
+
+function switchTab(key) {
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+
+  if (key === 'deck') {
+    document.querySelectorAll('.tab-btn')[0].classList.add('active');
+    document.getElementById('deck-tab').classList.add('active');
+  } else if (key === 'res') {
+    document.querySelectorAll('.tab-btn')[1].classList.add('active');
+    document.getElementById('res-tab').classList.add('active');
+  } else if (key === 'form') {
+    document.querySelectorAll('.tab-btn')[2].classList.add('active');
+    document.getElementById('form-tab').classList.add('active');
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => initLesson({"course_title": "Basic Broadcast Technology", "unit_title": "Unit 1: Foundations of Media Law, Ethics & Studio Operations", "day_title": "Day 4: Regulations, Rights, and Ethical Dilemmas", "bellringers": ["What is the difference between a broadcast law violation (e.g., FCC fined) and an ethical breach (e.g., standard code broken)?", "Define 'Fair Use' in your own words. When can a news team use copyrighted footage without buying a license?", "Scenario: A studio light cable is stretched tight across a doorway without tape. What specific safety hazards does this create?", "Quick Vocabulary Match: What is the difference between 'Libel' and 'Slander' in broadcast reporting?"], "slides": [{"title": "1. Lesson Overview & Professional Responsibilities", "standard": "CTE Standard: CTB.01.02", "bullets": ["Primary Focus: Examining federal regulations, essential industry vocabulary, and studio safety/ethics.", "Core Objective: Apply FCC compliance rules, identify broadcast legal terminology, and resolve ethical newsroom scenarios.", "Public Airwaves: Broadcasters use public airwaves licensed by the government, creating a high legal duty to serve the public interest.", "Today's Activities: Interactive broadcast scenario game, breaking news roleplay simulation, and check-in assessment."], "callout": "Industry Responsibility: Operating a broadcast camera comes with both technical and legal responsibilities.", "icon": "⚖️", "visual_caption": "Framework of Broadcast Regulation & Ethical Standards"}, {"title": "2. FCC Regulations & Public Airwave Duty", "standard": "CTE Standard: CTB.01.02", "bullets": ["Federal Communications Commission (FCC): Government body regulating television, radio, wire, satellite, and cable.", "Indecency vs. Obscenity: Strict federal rules limit offensive content during hours when children are likely watching (6 AM – 10 PM).", "Equal Time Rule: TV stations must afford equal opportunities to legally qualified political candidates.", "Station Identification (ID): Mandatory station call sign and location announcements required hourly."], "callout": "Regulatory Fact: Fines for willful FCC broadcast violations can reach tens of thousands of dollars per incident.", "icon": "📡", "visual_caption": "FCC Compliance & Public Interest Principles"}, {"title": "3. Essential Media Law Vocabulary", "standard": "CTE Standard: CTB.01.03", "bullets": ["Defamation: Publishing false statements that cause harm to a person's reputation.", "Libel: Written or published false statements that defame character.", "Slander: Spoken false statements broadcast over the air that defame character.", "Invasion of Privacy: Intrusion upon a person's seclusion or private affairs without newsgathering justification."], "callout": "Legal Boundary: Truth is always a absolute defense against defamation claims in journalism.", "icon": "📖", "visual_caption": "Legal Vocabulary: Defamation, Libel, and Slander"}, {"title": "4. Copyright & The Four Pillars of Fair Use", "standard": "CTE Standard: CTB.01.02", "bullets": ["Copyright Protection: Automatic legal ownership over original creative video, audio, and visual works.", "Fair Use Doctrine: Allows limited use of copyrighted material without permission for commentary, criticism, or news reporting.", "Pillar 1 - Purpose: Is the work transformative or strictly commercial?", "Pillar 2 - Nature: Is the original work factual or highly creative entertainment?", "Pillar 3 & 4 - Amount & Effect: How much is used, and does it reduce the copyright holder's potential market value?"], "callout": "Fair Use Myth: Adding 'No copyright infringement intended' in video descriptions does NOT legally protect you.", "icon": "©️", "visual_caption": "The Four Factors of Fair Use in Broadcast News"}, {"title": "5. Media Ethics: Society of Professional Journalists Code", "standard": "CTE Standard: CTB.05.01", "bullets": ["1. Seek Truth and Report It: Practice accuracy, fair representation, and thorough fact-verification.", "2. Minimize Harm: Treat sources, subjects, colleagues, and members of the public as human beings deserving respect.", "3. Act Independently: Avoid conflicts of interest, paid endorsements, or accepting special favors from news subjects.", "4. Be Accountable and Transparent: Acknowledge mistakes quickly, correct error reports, and explain journalistic choices."], "callout": "Ethical Pillar: Law tells you what you CAN do; Ethics tells you what you SHOULD do.", "icon": "🧭", "visual_caption": "The Four Pillars of the SPJ Code of Ethics"}, {"title": "6. Studio & Field Operational Safety Standards", "standard": "CTE Standard: CTB.05.01", "bullets": ["Cable Management: Secure all floor cables across walkways with gaffer tape to eliminate tripping hazards.", "Lighting Safety: Wear thermal work gloves when handling hot studio fixtures; verify safety cables are latched to lighting grids.", "Lift & Transport Protocol: Use two hands on tripod legs and keep heavy battery cases close to your body while lifting.", "Severe Weather Awareness: Monitor field conditions and suspend outdoor field shoots immediately if lightning is detected within 10 miles."], "callout": "Safety Baseline: Equipment can be replaced; student physical safety cannot. Zero hazards allowed.", "icon": "⚠️", "visual_caption": "Studio Safety Standards: Cable Taping & Thermal Equipment Handling"}, {"title": "7. Industry Terminology: Production & On-Air Jargon", "standard": "CTE Standard: CTB.01.03", "bullets": ["B-Roll: Supplemental underlying video footage layered over news package voiceovers.", "Chyron / Lower-Third: Graphic text overlay on screen identifying an anchor, guest, or location.", "Lower-Third Bug: Small station identification logo anchored in the bottom corner of the broadcast screen.", "Package (PKG): Self-contained, pre-recorded news story edited with voiceover, B-roll, soundbites, and a reporter standup."], "callout": "Vocabulary Check: Professional newsrooms run on clear, precise jargon to coordinate live broadcasts.", "icon": "📺", "visual_caption": "Anatomy of On-Screen Broadcast Elements"}, {"title": "8. Classroom Game: 'Legal, Ethical, or Air Hazard?'", "standard": "CTE Standard: CTB.01.02", "bullets": ["Game Setup: Divide room into Team A and Team B. Teachers read real-world scenario prompts.", "Scenario 1: Using 5 seconds of a hit song in a movie review without paying a license fee. (Answer: Fair Use / Legal)", "Scenario 2: Leaving an unweighted light stand setup right next to an emergency exit door. (Answer: Air Safety Hazard!)", "Scenario 3: Broadcasting an unverified rumor about a public official because another site posted it. (Answer: Unethical / Potential Libel)", "Scoring: Teams get 10 points for correctly identifying the category and explaining the rule."], "callout": "Interactive Challenge: Rapidly spot compliance violations before they hit live airwaves!", "icon": "🎮", "visual_caption": "Classroom Game: Evaluating Real-World Broadcast Scenarios"}, {"title": "9. Advanced Technical Vocabulary", "standard": "CTE Standard: CTB.01.03", "bullets": ["Standup: Reporter delivering story details directly into the camera on location.", "Soundbite (SOT): Short, edited audio/video excerpt from an interview subject.", "Teleprompter: Display device projecting script text in front of the camera lens for anchors to read.", "IFB (Interruptible Foldback): Earpiece through which anchors receive live cues from the producer and director."], "callout": "Control Room Tech: IFB systems allow directors to talk directly into an anchor's ear mid-broadcast.", "icon": "🎙️", "visual_caption": "Technical Broadcast Communication Tools"}, {"title": "10. Kinesthetic Activity: Breaking News Ethical Simulation", "standard": "CTE Standard: CTB.05.01", "bullets": ["Student Roles: Groups assign 1 Executive Producer, 2 Anchors, 1 Field Reporter, and 1 Safety Officer.", "Scenario: Unverified social media posts report a water main break in the school cafeteria. Photos show water on the floor.", "Action Step 1: Safety Officer checks physical hazard clearance for cameras.", "Action Step 2: Producer & Reporter verify 2 independent sources before going live.", "Action Step 3: Anchors act out a 30-second live breaking news bulletin prioritizing facts over speculation."], "callout": "Roleplay Objective: Practice verifying information under live production pressure without sacrificing ethics.", "icon": "🎭", "visual_caption": "Interactive Roleplay: Managing Live Newsroom Crisis Scenarios"}, {"title": "11. Rapid-Fire Terminology Speed Match", "standard": "CTE Standard: CTB.01.03", "bullets": ["Quick Match 1: What term describes written false statements? ➔ Libel", "Quick Match 2: What term describes spoken false statements? ➔ Slander", "Quick Match 3: What do we call text overlaying an anchor's name on screen? ➔ Lower-Third / Chyron", "Quick Match 4: What system feeds live producer audio into an anchor's ear? ➔ IFB", "Quick Match 5: What legal doctrine allows fair snippet usage for news criticism? ➔ Fair Use"], "callout": "Retention Check: Master these terms to communicate effectively during production calls.", "icon": "⏱️", "visual_caption": "Vocabulary Speed Review & Industry Terminology Check"}, {"title": "12. Lesson Wrap-Up & Checkpoint Instructions", "standard": "CTE Standard: CTB.05.01", "bullets": ["Core Recap: Public airwaves require legal compliance (FCC), high ethical standards (SPJ), and strict physical safety.", "Key Takeaway: Never sacrifice truth or safety for speed or sensationalism.", "Next Action: Complete the fill-in response checkpoint below on law, ethics, and terminology.", "Turn-In Protocol: Click the submission button below to trigger print settings and hand your page into the Red Basket!"], "callout": "Daily Checkpoint: Complete all fill-in questions and self-assessments accurately before printing.", "icon": "📥", "visual_caption": "Lesson Summary & Daily Form Completion Requirements"}], "resources": [{"title": "SPJ Code of Ethics (Official Guide)", "description": "Reference poster outlining the four foundational principles of ethical journalism.", "file": "spj_code_of_ethics.pdf"}, {"title": "FCC Broadcast Manual & Fair Use Primer", "description": "Comprehensive reference document detailing public airwave regulations and fair use copyright guidelines.", "file": "fcc_broadcast_regulations_guide.pdf"}], "form": [{"label": "Student Name", "type": "short_text", "required": true}, {"label": "Date", "type": "date", "required": true}, {"label": "Fill-In Question 1: Written false statements that cause harm to a person's reputation are known as __________ , while spoken false statements delivered over the airwaves are called __________ .", "type": "short_text", "required": true}, {"label": "Fill-In Question 2: The legal doctrine that permits limited news usage of copyrighted footage without paying a licensing fee is known as __________ .", "type": "short_text", "required": true}, {"label": "Fill-In Question 3: The acronym IFB stands for Interruptible __________ , which allows producers to speak into an anchor's earpiece.", "type": "short_text", "required": true}, {"label": "Scenario Reflection: Explain why securing cables across doorways with gaffer tape is a non-negotiable safety rule in broadcast production.", "type": "quote_citation", "required": true}, {"label": "Self-Assessment: Rate your mastery of broadcast regulations, media law vocabulary, and newsroom ethics.", "type": "rating_scale", "options": ["1 - Beginning (Struggling to distinguish libel from slander or fair use principles)", "2 - Developing (Understand basic ethics but need assistance with FCC regulations)", "3 - Competent (Confidently identify key terminology, legal rules, and ethical standards)", "4 - Expert (Can lead a newsroom crisis simulation and explain fair use guidelines to peers)"], "required": true}, {"label": "Studio Safety & Compliance Pledge", "type": "checkbox_group", "options": ["I confirm I completed today's roleplay simulation and reviewed all broadcast safety and legal standards."], "required": true}]}));
+</script>
+</body>
+</html>
