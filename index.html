@@ -300,6 +300,8 @@ let bellringers = [];
 
 function safePrint(e) {
   if (e) e.preventDefault();
+  window.print();
+}
   
   const formElement = document.getElementById('checkpoint-form').cloneNode(true);
   
