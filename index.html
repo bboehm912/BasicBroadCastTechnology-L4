@@ -354,7 +354,8 @@ function initLesson(data) {
   document.getElementById('slide-tracker').innerText = `Slide 1 of ${totalSlides}`;
 
   renderSlides(data.slides || []);
-// renderResources(data.resources || []); // Disabled JSON resource injection  renderForm(data.form || []);
+  // renderResources(data.resources || []); // Disabled JSON resource injection
+  renderForm(data.form || []);
 
   randomizeBellringer();
 }
