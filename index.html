@@ -209,10 +209,10 @@ input, textarea, select {
 .italic { font-style: italic; }
 .subtitle { color: var(--text-muted); }
 
-/* Print styles to ensure direct print works cleanly */
+/* Print styles for direct printing inside Schoology */
 @media print {
   body * {
-    visibility:
+    visibility: hidden;
   }
   #form-tab, #form-tab * {
     visibility: visible;
@@ -228,18 +228,21 @@ input, textarea, select {
     border: none;
   }
   
-  /* Hide interface buttons and headers on paper */
   .submit-btn, .nav-tabs, .header-card, .bellringer-box {
     display: none !important;
   }
   
-  /* Ensure form inputs display text clearly when printed */
   input, textarea, select {
     border: 1px solid #64748b !important;
     background: transparent !important;
     color: #000000 !important;
   }
 }
+</style>
+</head>
+<body>
+<div class="container">
+
   <!-- HEADER -->
   <div class="header-card">
     <div class="header-flex">
@@ -320,57 +323,6 @@ let bellringers = [];
 function safePrint(e) {
   if (e) e.preventDefault();
   window.print();
-}
-  
-  const formElement = document.getElementById('checkpoint-form').cloneNode(true);
-  
-  // Copy current user inputs into clone
-  const originalInputs = document.querySelectorAll('#checkpoint-form input, #checkpoint-form textarea, #checkpoint-form select');
-  const clonedInputs = formElement.querySelectorAll('input, textarea, select');
-  originalInputs.forEach((input, index) => {
-    if (input.type === 'checkbox' || input.type === 'radio') {
-      clonedInputs[index].checked = input.checked;
-    } else {
-      clonedInputs[index].value = input.value;
-    }
-  });
-
-  const printHTML = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <title>${document.title}</title>
-      <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 30px; color: #0f172a; }
-        .form-group { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #cbd5e1; }
-        label { font-weight: bold; margin-bottom: 6px; display: block; }
-        input, textarea, select { width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; box-sizing: border-box; }
-        .submit-btn { display: none !important; }
-      </style>
-    </head>
-    <body>
-      <h2>Basic Broadcast Technology — Student Work Checkpoint</h2>
-      ${formElement.outerHTML}
-      <script>
-        window.onload = function() {
-          window.focus();
-          window.print();
-        };
-      <\/script>
-    </body>
-    </html>
-  `;
-
-  try {
-    const blob = new Blob([printHTML], { type: 'text/html' });
-    const blobUrl = URL.createObjectURL(blob);
-    const printWindow = window.open(blobUrl, '_blank');
-    if (!printWindow) {
-      window.print();
-    }
-  } catch (err) {
-    window.print();
-  }
 }
 
 const stockImagePool = [
