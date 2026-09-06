@@ -211,16 +211,35 @@ input, textarea, select {
 
 /* Print styles to ensure direct print works cleanly */
 @media print {
-  body * { visibility: hidden; }
-  #form-tab, #form-tab * { visibility: visible; }
-  #form-tab { position: absolute; left: 0; top: 0; width: 100%; }
-  .submit-btn { display: none !important; }
+  body * {
+    visibility:
+  }
+  #form-tab, #form-tab * {
+    visibility: visible;
+  }
+  #form-tab {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+  }
+  
+  /* Hide interface buttons and headers on paper */
+  .submit-btn, .nav-tabs, .header-card, .bellringer-box {
+    display: none !important;
+  }
+  
+  /* Ensure form inputs display text clearly when printed */
+  input, textarea, select {
+    border: 1px solid #64748b !important;
+    background: transparent !important;
+    color: #000000 !important;
+  }
 }
-</style>
-</head>
-<body>
-<div class="container">
-
   <!-- HEADER -->
   <div class="header-card">
     <div class="header-flex">
