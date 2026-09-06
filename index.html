@@ -278,19 +278,72 @@ input, textarea, select {
   <!-- TAB: STUDENT WORK CHECKPOINT -->
   <div id="form-tab" class="card tab-content">
     <h3>Student Work Checkpoint & Reflection</h3>
-    <form id="checkpoint-form">
-      <!-- Dynamic form fields injected by script.js -->
-      <button type="submit" class="submit-btn">Print this page and Turn into the Red Basket!</button>
-    </form>
-  </div>
-
-</div>
-
+    <form id="checkpoint-form" onsubmit="safePrint(event)">
+  <!-- Dynamic form fields injected by script.js -->
+  <button type="submit" class="submit-btn">Print this page and turn into the Red Basket!</button>
+</form>
 <script>
 let currentSlide = 1;
 let totalSlides = 1;
 let bellringers = [];
 
+function safePrint(e) {
+  if (e) e.preventDefault();
+  
+  // Detect if running inside Schoology's iframe
+  const isEmbedded = window.self !== window.top;
+
+  if (isEmbedded) {
+    const formElement = document.getElementById('checkpoint-form').cloneNode(true);
+    
+    // Copy current user input values into the clone for printing
+    const originalInputs = document.querySelectorAll('#checkpoint-form input, #checkpoint-form textarea, #checkpoint-form select');
+    const clonedInputs = formElement.querySelectorAll('input, textarea, select');
+    originalInputs.forEach((input, index) => {
+      if (input.type === 'checkbox' || input.type === 'radio') {
+        clonedInputs[index].checked = input.checked;
+      } else {
+        clonedInputs[index].value = input.value;
+      }
+    });
+
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>${document.title}</title>
+          <style>
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 30px; color: #0f172a; }
+            .form-group { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #cbd5e1; }
+            label { font-weight: bold; margin-bottom: 6px; display: block; }
+            input, textarea, select { width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; box-sizing: border-box; }
+            .submit-btn { display: none !important; }
+          </style>
+        </head>
+        <body>
+          <h2>Basic Broadcast Technology — Student Work Checkpoint</h2>
+          ${formElement.outerHTML}
+          <script>
+            window.onload = function() {
+              window.focus();
+              window.print();
+              window.close();
+            };
+          <\/script>
+        </body>
+        </html>
+      `);
+      printWindow.document.close();
+      return;
+    }
+  }
+
+  // Direct page printing when not in an iframe
+  window.focus();
+  window.print();
+}  
 // Stock image pool for default visual slides
 const stockImagePool = [
   'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=300&q=80', // Turtle / Nature
